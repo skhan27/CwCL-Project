@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-
-    private Rigidbody rigidbody;
-    public float speed = 5.0f;
-    // Start is called before the first frame update
+    private float speed = 20.0f;
+    private CharacterController controller;
+    public GameObject bulletPrefab;
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -18,7 +17,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         float forwardInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
-        rigidbody.AddForce(new Vector3(1 * forwardInput * speed, 0, -1 * horizontalInput * speed));
+        controller.Move(new Vector3(1 * horizontalInput, -5, 1 * forwardInput) * Time.deltaTime * speed);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 5) , bulletPrefab.transform.rotation);
+        }
 
     }
 }
