@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("PlayerBall");
-        InvokeRepeating("LaunchBullet", 2.0f, 0.5f);
+        //InvokeRepeating("LaunchBullet", 2.0f, 0.5f);
     }
 
     // Update is called once per frame
